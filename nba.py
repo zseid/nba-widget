@@ -35,14 +35,17 @@ class NBATest(unittest.TestCase):
         score_elem = driver.find_elements_by_class_name('current_score')
         for scores in score_elem:
             scorelist.append(scores.text)
-            #print (scores.text)
         #
         #pull team
         #
         team_elem = driver.find_elements_by_class_name('team-points')
         for teams in team_elem:
             teamlist.append(teams.text[:3])
-            #print (teams.text[:3])
+        self.prntstats(scorelist,teamlist)
+
+    def printstats(self, score_list, team_list):
+        teamlist = team_list
+        scorelist = score_list
         for i in range(0, (len(scorelist) -1)):
             print("\n")
             print(teamlist[i],"Vs.",teamlist[i+1])
