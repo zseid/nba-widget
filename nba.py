@@ -18,9 +18,6 @@ class NBATest(unittest.TestCase):
         
         #while True:
         self.pulldata()
-        
-        #while True:
-        #    self.cmpmsg()
 
         def tearDown(self):
             self.driver.close()
@@ -41,7 +38,15 @@ class NBATest(unittest.TestCase):
         team_elem = driver.find_elements_by_class_name('team-points')
         for teams in team_elem:
             teamlist.append(teams.text[:3])
-        self.prntstats(scorelist,teamlist)
+        
+        #
+        #nugget text
+        #
+        #nugget_elem = driver.find_element_by_class_name('score__tile--nugget-text')
+        #print (nugget_elem.text)
+        
+        self.printstats(scorelist,teamlist)
+        
 
     def printstats(self, score_list, team_list):
         teamlist = team_list
@@ -50,10 +55,6 @@ class NBATest(unittest.TestCase):
             print("\n")
             print(teamlist[i],"Vs.",teamlist[i+1])
             print(scorelist[i],"    ",scorelist[i+1])
-        #
-        #nugget text
-        #
-        #nugget_elem = driver.find_element_by_class_name('score__tile--nugget-text')
-        #print (nugget_elem.text)
+
 if __name__ == "__main__":
     unittest.main()
