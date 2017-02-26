@@ -6,12 +6,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 
-
-
 class NBATest(unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.PhantomJS()
+        self.driver = webdriver.Firefox()
 
     def test_fblogin(self):
         driver = self.driver
@@ -19,7 +17,7 @@ class NBATest(unittest.TestCase):
         self.assertIn('NBA.com', driver.title)
         
         #while True:
-        self.pullscore()
+        self.pulldata()
         
         #while True:
         #    self.cmpmsg()
@@ -27,13 +25,31 @@ class NBATest(unittest.TestCase):
         def tearDown(self):
             self.driver.close()
             
-    def pullscore(self):
+    def pulldata(self):
+        teamlist = []
+        scorelist = []
         driver = self.driver
+        #
+        #pull scores
+        #
         score_elem = driver.find_elements_by_class_name('current_score')
         for scores in score_elem:
-            print (scores.text)
-
-
+            scorelist.append(scores.text)
+            #print (scores.text)
+        #
+        #pull team 
+        #
+        team_elem = driver.find_elements_by_class_name('team-points')
+        for teams in team_elem:
+            teamlist.append(teams.text[:3])
+            #print (teams.text[:3])
+        for i in range(0, (len(scorelist) -1)):
+            print(teamlist[i],"Vs.",teamlist[i+1],scorelist[i],"  ",scorelist[i+1])
+        #
+        #nugget text
+        #
+        #nugget_elem = driver.find_element_by_class_name('score__tile--nugget-text')
+        #print (nugget_elem.text)
 if __name__ == "__main__":
     unittest.main()
 
