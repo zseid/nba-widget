@@ -51,7 +51,8 @@ class NBATest(unittest.TestCase):
     def printstats(self, score_list, team_list):
         teamlist = team_list
         scorelist = score_list
-        for i in range(0, (len(scorelist) -1)):
+        print (team_list)
+        for i in range(0, (len(scorelist) - 1), 2):
             print("\n")
             print(teamlist[i],"Vs.",teamlist[i+1])
             print(scorelist[i],"    ",scorelist[i+1])
